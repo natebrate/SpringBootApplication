@@ -1,0 +1,15 @@
+this is a spring boot base web application 
+
+its purpose is to update and view resources of the zoo
+
+Uses a mixutre of HTML, JavaScript, Java and other langauges in order to achive its purpose
+the folders of interest are the com.example.spring and webapps/ROOT
+
+
+com.example.spring
+- Contains the code to make the web interface and the database talk 
+
+webapps/ROOT
+- Contains the actual webpages for the database information to work with users
+
+requires the maven repository
