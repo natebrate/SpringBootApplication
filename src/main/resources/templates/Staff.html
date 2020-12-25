@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Management Page</title>
+</head>
+<body>
+<div align="center">
+    <h1>Staff Records</h1>
+    <a href="StaffForm.html">Enter New Staff</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>StaffID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Password</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="sale : ${listStaff}">
+            <td th:text="${Staff.StaffID}">ID</td>
+            <td th:text="${Staff.Fname}">First Name</td>
+            <td th:text="${Staff.Lname}">Last Name</td>
+            <td th:text="${Staff.Role}">Role</td>
+            <td th:text="${Staff.password}">Role</td>
+            <td>
+                <a th:href="/@{'/edit/' + ${Staff.StaffID}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="/@{'/delete/' + ${Staff.StaffID}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
