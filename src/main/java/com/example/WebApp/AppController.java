@@ -1,12 +1,14 @@
 package com.example.WebApp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@Controller
 public class AppController {
 
     @Autowired
@@ -38,6 +40,7 @@ public class AppController {
         return "index.jsp";
     }
 
+    //View Page for viewing staff members
     @RequestMapping("/")
     public String viewStaffPage(Model model) {
         List<Staff> listStaff = dao.list();
@@ -51,7 +54,7 @@ public class AppController {
         Staff staff = new Staff();
         model.addAttribute("staff", staff);
 
-        return "new_form";
+        return "StaffForm";
     }
 
     //Save for new Staff
@@ -62,14 +65,27 @@ public class AppController {
     }
 
     //Edit Staff Member
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/edit/{StaffID}")
     public ModelAndView showEditForm(@PathVariable(name = "StaffID") int StaffID) {
-        ModelAndView mav = new ModelAndView("edit_form");
+        ModelAndView mav = new ModelAndView("EditStaff");
         Staff staff = dao.get(StaffID);
         mav.addObject("Staff", staff);
 
         return mav;
     }
 
+    //Update the Staff Member
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("Staff") Staff staff) {
+        dao.update(staff);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping("/delete/{StaffID}")
+    public String delete(@PathVariable(name = "StaffID") int StaffID) {
+        dao.delete(StaffID);
+        return "redirect:/";
+    }
 
 }
