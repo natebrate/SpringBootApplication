@@ -12,11 +12,11 @@ import javax.persistence.Id;
 public class Staff {
     // initiate variables
         private int StaffID;
-        private String password = "password";
         private String Fname;
         private String Lname;
-        private final String username = Fname + "\t" + Lname; //username is first name + last name
         private boolean Role;
+        private int password;
+        //private final String username = Fname + "\t" + Lname; //username is first name + last name
 
         public Staff()
         {
@@ -31,23 +31,23 @@ public class Staff {
     public int getStaffID() {
             return StaffID;
         }
+
     public void setStaffID(int StaffID) {
         this.StaffID = StaffID;
     }
 
+    public int getPassword() {
+        return password;
+    }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
 
     public String getFname() {
             return Fname; }
     public void setFname(String Fname) {
         this.Fname = Fname;
-    }
-
-    public String getPassword() {
-            return password;
-        }
-
-    public void setPassword(String password) {
-        this.password = "password";
     }
 
     public String getLname() {

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Management Page</title>
+</head>
+<body>
+<div align="center">
+    <h1>Staff Records</h1>
+    <a href="StaffForm.html">Enter New Staff</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>StaffID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Role</th>
+            <th>Password</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--Table to show all Staff information-->
+        <tr th:each="Staff : ${listStaff}">
+            <td th:text="${Staff.staffID}">ID</td>
+            <td th:text="${Staff.fname}">First Name</td>
+            <td th:text="${Staff.lname}">Last Name</td>
+            <td th:text="${Staff.role}">Role</td>
+            <td th:text="${Staff.password}">Password</td>
+            <td>
+                <a href="/@{'/edit/' + ${Staff.staffID}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a href="/@{'/delete/' + ${Staff.staffID}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

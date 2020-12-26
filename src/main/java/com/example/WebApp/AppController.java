@@ -20,32 +20,13 @@ public class AppController {
     Return the mapping of the webpages so program can find them
     GetMapping as we are only obtaining the location
      */
-    @RequestMapping("/")
-    @ResponseBody
-    public String index(){
-        return "Successful";
-
-    }
-
-    //Login form
-    @RequestMapping("/index.jsp")
-    public String login() {
-        return "index.jsp";
-    }
-
-    //Login form with error
-    @RequestMapping("index-error.jsp")
-    public String LoginError(Model model){
-        model.addAttribute("LoginError", true);
-        return "index.jsp";
-    }
 
     //View Page for viewing staff members
     @RequestMapping("/")
     public String viewStaffPage(Model model) {
-        List<Staff> listStaff = dao.list();
+        List<Staff> listStaff = dao.listAll();
         model.addAttribute("listStaff", listStaff);
-        return "Staff";
+        return "index";
     }
 
     //Allowing for A new Staff Member
@@ -59,28 +40,28 @@ public class AppController {
 
     //Save for new Staff
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("sale") Staff staff) {
+    public String save(@ModelAttribute("Staff") Staff staff) {
         dao.save(staff);
         return "redirect:/";
     }
 
     //Edit Staff Member
-    @RequestMapping("/edit/{StaffID}")
+    /*@RequestMapping("/edit/{StaffID}")
     public ModelAndView showEditForm(@PathVariable(name = "StaffID") int StaffID) {
         ModelAndView mav = new ModelAndView("EditStaff");
         Staff staff = dao.get(StaffID);
         mav.addObject("Staff", staff);
 
         return mav;
-    }
+    }*/
 
     //Update the Staff Member
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    /*@RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@ModelAttribute("Staff") Staff staff) {
         dao.update(staff);
 
         return "redirect:/";
-    }
+    }*/
 
     @RequestMapping("/delete/{StaffID}")
     public String delete(@PathVariable(name = "StaffID") int StaffID) {
