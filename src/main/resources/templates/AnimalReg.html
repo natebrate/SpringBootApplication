@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.w3.org/1999/xhtml"
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" >
-    <title>Edit Staff</title>
+    <title>Animal Registration</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {box-sizing: border-box;}
 
@@ -83,6 +82,7 @@
                 border: 1px solid #ccc;
             }
         }
+
         .footer {
             position: fixed;
             left: 0;
@@ -103,44 +103,42 @@
     <a href="#contact">Ticket View</a>
     <div class="login-container">
         <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for.." title="Type in a name">
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
     </div>
 </div>
 
 <div align="center">
-    <h1>Edit Staff Member</h1>
-    <br />
-    <form action="#" th:action="@{/update}" th:object="${Staff}"
-          method="post">
-
-        <table border="0" cellpadding="10">
+    <table align="center " border="1" cellpadding="10">
             <tr>
-                <td>ID:</td>
-                <td><input type="number" th:field="*{staffID}" readonly="readonly" /></td>
+                <td colspan="2"><h2>Animal Registration</h2></td>
             </tr>
             <tr>
-                <td>First Name:</td>
-                <td><input type="text" th:field="*{fname}" /></td>
+                <td>Animal ID: </td><td><input type="text" name=" "></td>
             </tr>
             <tr>
-                <td>Last Name:</td>
-                <td><input type="text" th:field="*{lname}" /></td>
+                <td>Name: </td><td><input type="text" name=""></td>
             </tr>
             <tr>
-                <td>Role:</td>
-                <td><input type="text" th:field="*{role}" /></td>
+                <td>Age: </td><td><input type="text" name=""></td>
             </tr>
             <tr>
-                <td>Password:</td>
-                <td><input type="number" th:field="*{password}" /></td>
+                <td>Trainer ID: </td><td><input type="text" name=""></td>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit">Save</button> </td>
+                <td>Species ID: </td><td><input type="text" name=""></td>
             </tr>
-        </table>
-    </form>
+            <tr>
+                <td>Sex: </td><td><input type="text" name=""></td>
+            </tr>
+            <tr>
+                <td>Weight: </td><td><input type="text" name=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;"><button>Submit</button></td>
+            </tr>
+    </table>
 </div>
 <div class="footer">
     <p>Seaside Development</p>

@@ -16,6 +16,9 @@ public class AppController {
 
     @Autowired
     private StaffServices dao;
+    @Autowired
+    private AnimalServices repo;
+
 
     // handler methods go here..
 
@@ -32,6 +35,14 @@ public class AppController {
         return "index";
     }
 
+    //Viewing All animals
+    @RequestMapping("/AnimalView")
+    public String viewAnimalPage(Model model) {
+        List<animalInfo> listAnimal = repo.listAll();
+        model.addAttribute("listAnimal", listAnimal);
+        return "AnimalView";
+    }
+
     //Allowing for A new Staff Member
     @RequestMapping("/new")
     public String showNewForm(Model model) {
@@ -41,6 +52,15 @@ public class AppController {
         return "StaffReg";
     }
 
+    //Allowing for a new Animal
+    @RequestMapping("/new")
+    public String showNewAnimal(Model model) {
+        animalInfo info = new animalInfo();
+        model.addAttribute("animalInfo", info);
+
+        return "AnimalReg";
+    }
+
     //Save for new Staff
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveStaff(@ModelAttribute("Staff") Staff staff) {
@@ -48,6 +68,15 @@ public class AppController {
 
         return "redirect:/";
     }
+
+    //Save for new Animal
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveAnimal(@ModelAttribute("animalInfo") animalInfo info) {
+        repo.save(info);
+
+        return "redirect:/";
+    }
+
 
     //Edit Staff Member
     @RequestMapping("/edit/{staffID}")
@@ -59,12 +88,28 @@ public class AppController {
         return mav;
     }
 
+    //Edit Animal Member
+    @RequestMapping("/edit/{animalID}")
+    public ModelAndView showAnimalEdit(@PathVariable(name = "animalID") int animalID) {
+        ModelAndView mav = new ModelAndView("AnimalEdit");
+        animalInfo info = repo.get(animalID);
+        mav.addObject("animalInfo", info);
+
+        return mav;
+    }
+
+    //Delete Staff Member
     @RequestMapping("/delete/{staffID}")
     public String delete(@PathVariable(name = "staffID") int StaffID) {
         dao.delete(StaffID);
         return "redirect:/";
     }
 
-
+    //Delete Animal Member
+    @RequestMapping("/delete/{animalID}")
+    public String deleteAnimal(@PathVariable(name = "animalID") int animalID) {
+        repo.delete(animalID);
+        return "redirect:/";
+    }
 
 }

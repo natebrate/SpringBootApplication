@@ -19,7 +19,7 @@ public class AnimalServices {
     @Autowired
     AnimalRepository animalRepository;
 
-    public List<animalInfo> list(){
+    public List<animalInfo> listAll(){
         return animalRepository.findAll();
     }
 
