@@ -46,14 +46,14 @@ public class AppController {
     }
 
     //Edit Staff Member
-    /*@RequestMapping("/edit/{StaffID}")
-    public ModelAndView showEditForm(@PathVariable(name = "StaffID") int StaffID) {
+    @RequestMapping("/edit/{staffID}")
+    public ModelAndView showEditForm(@PathVariable(name = "staffID") int staffID) {
         ModelAndView mav = new ModelAndView("EditStaff");
-        Staff staff = dao.get(StaffID);
+        Staff staff = dao.get(staffID);
         mav.addObject("Staff", staff);
 
         return mav;
-    }*/
+    }
 
     //Update the Staff Member
     /*@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -63,8 +63,8 @@ public class AppController {
         return "redirect:/";
     }*/
 
-    @RequestMapping("/delete/{StaffID}")
-    public String delete(@PathVariable(name = "StaffID") int StaffID) {
+    @RequestMapping("/delete/{staffID}")
+    public String delete(@PathVariable(name = "staffID") int StaffID) {
         dao.delete(StaffID);
         return "redirect:/";
     }
