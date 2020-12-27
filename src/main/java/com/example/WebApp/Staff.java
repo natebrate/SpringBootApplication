@@ -16,16 +16,23 @@ public class Staff {
         private String Lname;
         private boolean Role;
         private int password;
-        //private final String username = Fname + "\t" + Lname; //username is first name + last name
+        private final String username = Fname + "\t" + Lname; //username is first name + last name
 
-        public Staff()
+        protected Staff()
         {
             /*empty constructor*/
         }
 
-        /*
-        GETTERS AND SETTERS
-         */
+        protected Staff(int StaffID, String Fname, String Lname, boolean Role, int password) {
+            super();
+            this.StaffID = StaffID;
+            this.Fname = Fname;
+            this.Lname = Lname;
+            this.Role = Role;
+            this.password = password;
+        }
+
+    // GETTERS AND SETTERS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getStaffID() {
@@ -46,6 +53,7 @@ public class Staff {
 
     public String getFname() {
             return Fname; }
+
     public void setFname(String Fname) {
         this.Fname = Fname;
     }

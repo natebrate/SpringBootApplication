@@ -3,7 +3,10 @@ package com.example.WebApp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
 public class AppController {
 
     @Autowired
-    private DAO dao;
+    private StaffServices dao;
 
     // handler methods go here..
 
@@ -33,40 +36,35 @@ public class AppController {
     @RequestMapping("/new")
     public String showNewForm(Model model) {
         Staff staff = new Staff();
-        model.addAttribute("staff", staff);
+        model.addAttribute("Staff", staff);
 
-        return "StaffForm";
+        return "StaffReg";
     }
 
     //Save for new Staff
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("Staff") Staff staff) {
+    public String saveStaff(@ModelAttribute("Staff") Staff staff) {
         dao.save(staff);
+
         return "redirect:/";
     }
 
     //Edit Staff Member
     @RequestMapping("/edit/{staffID}")
     public ModelAndView showEditForm(@PathVariable(name = "staffID") int staffID) {
-        ModelAndView mav = new ModelAndView("EditStaff");
+        ModelAndView mav = new ModelAndView("StaffEdit");
         Staff staff = dao.get(staffID);
         mav.addObject("Staff", staff);
 
         return mav;
     }
 
-    //Update the Staff Member
-    /*@RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("Staff") Staff staff) {
-        dao.update(staff);
-
-        return "redirect:/";
-    }*/
-
     @RequestMapping("/delete/{staffID}")
     public String delete(@PathVariable(name = "staffID") int StaffID) {
         dao.delete(StaffID);
         return "redirect:/";
     }
+
+
 
 }

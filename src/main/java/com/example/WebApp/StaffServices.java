@@ -5,13 +5,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+/*
+SERVICES FOR THE STAFF TABLE
+ */
 @Service
 @Transactional
-public class DAO {
+public class StaffServices {
 
     @Autowired
-    private Repository repo;
+    private StaffRepository repo;
+
 
     //Retrieve All Elements From the Staff Table
     public  List<Staff> listAll(){
@@ -32,4 +35,5 @@ public class DAO {
     public void delete(int StaffID) {
         repo.deleteById(StaffID);
     }
+
 }
