@@ -18,6 +18,8 @@ public class AppController {
     private StaffServices dao;
     @Autowired
     private AnimalServices repo;
+    @Autowired
+    private SpeciesServices services;
 
 
     // handler methods go here..
@@ -43,6 +45,14 @@ public class AppController {
         return "AnimalView";
     }
 
+    //View All Species Information
+    @RequestMapping("/AnimalView")
+    public String viewSpeciePage(Model model) {
+        List<SpeciesInfo> listSpecies = services.listAll();
+        model.addAttribute("listSpecies", listSpecies);
+        return "AnimalView";
+    }
+
     //Allowing for A new Staff Member
     @RequestMapping("/new")
     public String showNewForm(Model model) {
@@ -53,7 +63,7 @@ public class AppController {
     }
 
     //Allowing for a new Animal
-    @RequestMapping("/new")
+    @RequestMapping("/AnimalReg")
     public String showNewAnimal(Model model) {
         animalInfo info = new animalInfo();
         model.addAttribute("animalInfo", info);
@@ -70,9 +80,17 @@ public class AppController {
     }
 
     //Save for new Animal
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String saveAnimal(@ModelAttribute("animalInfo") animalInfo info) {
         repo.save(info);
+
+        return "redirect:/";
+    }
+
+    //Save for new Species
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public String SaveSpecies(@ModelAttribute("SpeciesInfo") SpeciesInfo speciesInfo) {
+        services.save(speciesInfo);
 
         return "redirect:/";
     }
@@ -98,6 +116,17 @@ public class AppController {
         return mav;
     }
 
+    //Edit Species Member
+    @RequestMapping("/edit/{animalID}")
+    public ModelAndView showSpecieEdit(@PathVariable(name = "SpecId") int SpecID) {
+        ModelAndView mav = new ModelAndView("SpeciesEdit");
+        SpeciesInfo speciesInfo = services.get(SpecID);
+        mav.addObject("SpeciesInfo", speciesInfo);
+
+        return mav;
+    }
+
+
     //Delete Staff Member
     @RequestMapping("/delete/{staffID}")
     public String delete(@PathVariable(name = "staffID") int StaffID) {
@@ -109,6 +138,13 @@ public class AppController {
     @RequestMapping("/delete/{animalID}")
     public String deleteAnimal(@PathVariable(name = "animalID") int animalID) {
         repo.delete(animalID);
+        return "redirect:/";
+    }
+
+    //Delete Species Member
+    @RequestMapping("/delete/{SpecId}")
+    public String deleteSpecies(@PathVariable(name = "SpecId") int SpecId) {
+        services.delete(SpecId);
         return "redirect:/";
     }
 
