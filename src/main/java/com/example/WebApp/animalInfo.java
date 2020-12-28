@@ -6,6 +6,7 @@ import javax.persistence.*;
   this the class for the animalInfo Table
  */
 @Entity
+@Table(name = "animalInfo")
 public class animalInfo {
     // initiate variables
     private int animalID;

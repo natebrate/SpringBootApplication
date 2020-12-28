@@ -29,28 +29,15 @@ public class AppController {
     GetMapping as we are only obtaining the location
      */
 
+    /*
+    STAFF/USER CONTROLLER
+     */
     //View Page for viewing staff members
     @RequestMapping("/")
     public String viewStaffPage(Model model) {
         List<Staff> listStaff = dao.listAll();
         model.addAttribute("listStaff", listStaff);
         return "index";
-    }
-
-    //Viewing All animals
-    @RequestMapping("/AnimalView")
-    public String viewAnimalPage(Model model) {
-        List<animalInfo> listAnimal = repo.listAll();
-        model.addAttribute("listAnimal", listAnimal);
-        return "AnimalView";
-    }
-
-    //View All Species Information
-    @RequestMapping("/AnimalView")
-    public String viewSpeciePage(Model model) {
-        List<SpeciesInfo> listSpecies = services.listAll();
-        model.addAttribute("listSpecies", listSpecies);
-        return "AnimalView";
     }
 
     //Allowing for A new Staff Member
@@ -62,15 +49,6 @@ public class AppController {
         return "StaffReg";
     }
 
-    //Allowing for a new Animal
-    @RequestMapping("/AnimalReg")
-    public String showNewAnimal(Model model) {
-        animalInfo info = new animalInfo();
-        model.addAttribute("animalInfo", info);
-
-        return "AnimalReg";
-    }
-
     //Save for new Staff
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveStaff(@ModelAttribute("Staff") Staff staff) {
@@ -78,23 +56,6 @@ public class AppController {
 
         return "redirect:/";
     }
-
-    //Save for new Animal
-    @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public String saveAnimal(@ModelAttribute("animalInfo") animalInfo info) {
-        repo.save(info);
-
-        return "redirect:/";
-    }
-
-    //Save for new Species
-    @RequestMapping(value = "/send", method = RequestMethod.POST)
-    public String SaveSpecies(@ModelAttribute("SpeciesInfo") SpeciesInfo speciesInfo) {
-        services.save(speciesInfo);
-
-        return "redirect:/";
-    }
-
 
     //Edit Staff Member
     @RequestMapping("/edit/{staffID}")
@@ -104,6 +65,42 @@ public class AppController {
         mav.addObject("Staff", staff);
 
         return mav;
+    }
+
+    /* It deletes record for the given id in URL and redirects to / */
+    //Delete Staff Member
+    @RequestMapping("/delete/{staffID}")
+    public String delete(@PathVariable(name = "staffID") int StaffID) {
+        dao.delete(StaffID);
+        return "redirect:/";
+    }
+
+    /*
+    ANIMAL CONTROLLER
+     */
+    //Viewing All animals
+    @RequestMapping("/AnimalView")
+    public String viewAnimalPage(Model model) {
+        List<animalInfo> listAnimal = repo.listAll();
+        model.addAttribute("listAnimal", listAnimal);
+        return "AnimalView";
+    }
+
+    //Allowing for a new Animal
+    @RequestMapping("/AnimalReg")
+    public String showNewAnimal(Model model) {
+        animalInfo info = new animalInfo();
+        model.addAttribute("animalInfo", info);
+
+        return "AnimalReg";
+    }
+
+    //Save for new Animal
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    public String saveAnimal(@ModelAttribute("animalInfo") animalInfo info) {
+        repo.save(info);
+
+        return "redirect:/AnimalView";
     }
 
     //Edit Animal Member
@@ -116,8 +113,37 @@ public class AppController {
         return mav;
     }
 
+    //Delete Animal Member
+    @RequestMapping("/delete/{animalID}")
+    public String deleteAnimal(@PathVariable(name = "animalID") int animalID) {
+        repo.delete(animalID);
+        return "redirect:/AnimalView";
+    }
+
+
+
+    /*
+    SPECIES CONTROLLER
+     */
+
+    //View All Species Information
+    @RequestMapping("/SpeciesView")
+    public String viewSpeciePage(Model model) {
+        List<SpeciesInfo> listSpecies = services.listAll();
+        model.addAttribute("listSpecies", listSpecies);
+        return "SpeciesView";
+    }
+
+    //Save for new Species
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public String SaveSpecies(@ModelAttribute("SpeciesInfo") SpeciesInfo speciesInfo) {
+        services.save(speciesInfo);
+
+        return "redirect:/";
+    }
+
     //Edit Species Member
-    @RequestMapping("/edit/{animalID}")
+    @RequestMapping("/edit/{SpecId}")
     public ModelAndView showSpecieEdit(@PathVariable(name = "SpecId") int SpecID) {
         ModelAndView mav = new ModelAndView("SpeciesEdit");
         SpeciesInfo speciesInfo = services.get(SpecID);
@@ -126,26 +152,10 @@ public class AppController {
         return mav;
     }
 
-
-    //Delete Staff Member
-    @RequestMapping("/delete/{staffID}")
-    public String delete(@PathVariable(name = "staffID") int StaffID) {
-        dao.delete(StaffID);
-        return "redirect:/";
-    }
-
-    //Delete Animal Member
-    @RequestMapping("/delete/{animalID}")
-    public String deleteAnimal(@PathVariable(name = "animalID") int animalID) {
-        repo.delete(animalID);
-        return "redirect:/";
-    }
-
     //Delete Species Member
     @RequestMapping("/delete/{SpecId}")
     public String deleteSpecies(@PathVariable(name = "SpecId") int SpecId) {
         services.delete(SpecId);
-        return "redirect:/";
+        return "redirect:/SpeciesView";
     }
-
 }

@@ -102,9 +102,13 @@
 <div class="topnav">
     <a class="active" href="#home">Home</a>
     <a href="index.html">Staff View</a>
-    <a href="AnimalReg.html">Animal View</a>
-    <a href="#contact">Species View</a>
-    <a href="#contact">Ticket View</a>
+    <a href="AnimalView.html">Animal View</a>
+    <a href="SpeciesView.html">Species View</a>
+    <div class="login-container">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+        </form>
+    </div>
     <div class="login-container">
         <form action="/action_page.php">
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for.." title="Type in a name">
@@ -117,8 +121,10 @@
 <div class="right">
 
     <div align="center">
-        <h1>Animal Records</h1>
-        <a href="AnimalReg.html">Enter New Animal</a>
+        <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+
+        <h1>Species Records</h1>
+        <a href="SpeciesEdit.html">Update Species Information</a>
         <br/><br/>
         <table border="1" cellpadding="10" id="myTable">
             <thead>
@@ -135,17 +141,16 @@
             <tbody>
             <!--Table to show all Staff information-->
             <tr th:each="SpeciesInfo : ${listSpecies}">
-                <td th:text="${SpeciesInfo.animalID}">ID</td>
-                <td th:text="${SpeciesInfo.name}">Name</td>
-                <td th:text="${SpeciesInfo.trainerID}">Trainer ID</td>
-                <td th:text="${SpeciesInfo.speciesID}">Species ID</td>
-                <td th:text="${SpeciesInfo.age}">Age</td>
-                <td th:text="${SpeciesInfo.sex}">Gender</td>
-                <td th:text="${SpeciesInfo.weight}">Weight</td>
+                <td th:text="${SpeciesInfo.specId}">ID</td>
+                <td th:text="${SpeciesInfo.species}">Name</td>
+                <td th:text="${SpeciesInfo.feedingType}">Trainer ID</td>
+                <td th:text="${SpeciesInfo.quantity}">Species ID</td>
+                <td th:text="${SpeciesInfo.description}">Age</td>
+                <td th:text="${SpeciesInfo.locationID}">Gender</td>
                 <td>
-                    <a href="/@{'/edit/' + ${animalInfo.animalID}}">Edit</a>
+                    <a href="/@{'/edit/' + ${SpeciesInfo.specId}}">Edit</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="/@{'/delete/' + ${animalInfo.animalID}}">Delete</a>
+                    <a href="/@{'/delete/' + ${SpeciesInfo.specId}}">Delete</a>
                 </td>
             </tr>
             </tbody>

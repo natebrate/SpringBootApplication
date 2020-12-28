@@ -15,7 +15,6 @@ public class StaffServices {
     @Autowired
     private StaffRepository repo;
 
-
     //Retrieve All Elements From the Staff Table
     public  List<Staff> listAll(){
        return repo.findAll();
@@ -28,7 +27,7 @@ public class StaffServices {
 
     //Get the Staff ID
     public Staff get(int StaffID) {
-        return repo.findById(StaffID);
+        return repo.findByStaffID(StaffID);
     }
 
     // DELETE THE STAFF MEMBER
