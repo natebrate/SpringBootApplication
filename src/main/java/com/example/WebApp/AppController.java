@@ -59,9 +59,9 @@ public class AppController {
 
     //Edit Staff Member
     @RequestMapping("/edit/{staffID}")
-    public ModelAndView showEditForm(@PathVariable(name = "staffID") int staffID) {
+    public ModelAndView showEditForm(@PathVariable(name = "staffID") int StaffID) {
         ModelAndView mav = new ModelAndView("StaffEdit");
-        Staff staff = dao.get(staffID);
+        Staff staff = dao.get(StaffID);
         mav.addObject("Staff", staff);
 
         return mav;

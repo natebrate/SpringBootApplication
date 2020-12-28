@@ -146,9 +146,9 @@
             <td th:text="${Staff.role}">Role</td>
             <td th:text="${Staff.password}">Password</td>
             <td>
-                <a th:href="/@{'/edit/' + ${staff.staffID}}">Edit</a>
+                <a th:href="@{'/edit/' + ${Staff.staffID}}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
-                <a th:href="/@{'/delete/' + ${staff.staffID}}">Delete</a>
+                <a th:href="@{'/delete/' + ${Staff.staffID}}">Delete</a>
             </td>
         </tr>
         </tbody>
