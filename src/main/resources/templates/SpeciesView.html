@@ -148,9 +148,9 @@
                 <td th:text="${SpeciesInfo.description}">Age</td>
                 <td th:text="${SpeciesInfo.locationID}">Gender</td>
                 <td>
-                    <a href="/@{'/edit/' + ${SpeciesInfo.specId}}">Edit</a>
+                    <a th:href="@{'/edit/' + ${SpeciesInfo.specId}}">Edit</a>
                     &nbsp;&nbsp;&nbsp;
-                    <a href="/@{'/delete/' + ${SpeciesInfo.specId}}">Delete</a>
+                    <a th:href="@{'/delete/' + ${SpeciesInfo.specId}}">Delete</a>
                 </td>
             </tr>
             </tbody>

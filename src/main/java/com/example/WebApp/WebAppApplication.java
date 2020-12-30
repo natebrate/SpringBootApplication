@@ -17,6 +17,9 @@ public class WebAppApplication {
 		String rawPassword = "password"; //place user password here
 		String encodedPassword = encoder.encode(rawPassword);
 
+		/*
+		Print out the encryption for the user password
+		 */
 		System.out.println(encodedPassword);
 	}
 
