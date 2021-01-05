@@ -65,7 +65,7 @@
 				<artifactId>heroku-maven-plugin</artifactId>
 				<version>1.1.3</version>
 				<configuration>
-					<appName>springbootheroacads</appName>
+					<appName>heroku-demo-stackabus</appName>
 					<includeTarget>false</includeTarget>
 					<includes>
 						<include>${project.build.directory}/${project.build.finalName}.jar</include>
