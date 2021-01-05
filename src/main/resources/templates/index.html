@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
->
-
+<html lang="en"   xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"
           content="width=device-width, initial-scale=1">
@@ -101,17 +99,12 @@
 <body>
 <!--LEFT SIDE-->
     <div class="topnav">
-        <a class="active" href="#home">Home</a>
-        <a href="index.html">Staff View</a>
-        <a href="AnimalView.html">Animal View</a>
-        <a href="SpeciesView.html">Species View</a>
+        <a class="active" href="#">Home</a>
+        <a href="/">Staff View</a>
+        <a href="/animal_view">Animal View</a>
+        <a href="/species_view">Species View</a>
         <div class="login-container">
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Logout">
-            </form>
-        </div>
-        <div class="login-container">
-            <form action="/action_page.php">
+            <form action="#">
                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for.." title="Type in a name">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -124,7 +117,7 @@
         <div align="center">
             <h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
     <h1>Staff Records</h1>
-    <a href="StaffReg.html">Enter New Staff</a>
+    <a href="/new">Enter New Staff</a>
     <br/><br/>
     <table border="1" cellpadding="10" id="myTable">
         <thead>
@@ -134,7 +127,7 @@
             <th>Last Name</th>
             <th>Role</th>
             <th>Password</th>
-            <th> Actions</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
